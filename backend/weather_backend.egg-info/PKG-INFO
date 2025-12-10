@@ -1,0 +1,16 @@
+Metadata-Version: 2.4
+Name: weather-backend
+Version: 0.1.0
+Summary: Clean-architecture FastAPI weather service
+Requires-Python: >=3.11
+Requires-Dist: fastapi==0.110.0
+Requires-Dist: uvicorn[standard]==0.24.0.post1
+Requires-Dist: httpx==0.25.2
+Requires-Dist: pydantic==2.9.2
+Requires-Dist: pydantic-settings==2.6.1
+Requires-Dist: prometheus-client==0.21.0
+Provides-Extra: dev
+Requires-Dist: pytest==7.4.4; extra == "dev"
+Requires-Dist: pytest-asyncio==0.21.1; extra == "dev"
+Requires-Dist: pytest-cov==4.1.0; extra == "dev"
+Requires-Dist: respx==0.20.2; extra == "dev"
