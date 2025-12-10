@@ -6,10 +6,12 @@ Production-ready weather stack: FastAPI (Clean Architecture + Prometheus), Nuxt 
 
 ## 📁 Структура
 
-`backend/     FastAPI + uv + pytest + Prometheus metrics
+```bash
+backend/     FastAPI + uv + pytest + Prometheus metrics
 frontend/    Nuxt 3 + TypeScript + Vitest + i18n
 monitoring/  Prometheus + blackbox-exporter конфиги
-grafana/     Datasource provisioning + Weather Service Overview.json`
+grafana/     Datasource provisioning + Weather Service Overview.json
+```
 
 ---
 
@@ -17,13 +19,13 @@ grafana/     Datasource provisioning + Weather Service Overview.json`
 
 ### Backend (FastAPI + uv)
 
-`bash
+```bash
 cd backend
 uv sync --extra dev                # создаёт .venv
 cp .env.example .env               # пропишите WEATHER_APP_WEATHER_API_KEY
 uv run uvicorn app.main:app --reload
-`
-Переменные WEATHER*APP*\*:
+```
+Переменные WEATHER_APP:
 
 - WEATHER_API_KEY — ключ WeatherAPI (обязателен вне тестов)
 - WEATHER_API_BASE_URL — дефолт https://api.weatherapi.com/v1
@@ -33,29 +35,30 @@ uv run uvicorn app.main:app --reload
 
 ### Frontend (Nuxt 3)
 
-`bash
+```bash
 cd frontend
 npm install
 npm run dev
-`
+```
 UI двуязычный (RU/EN), переключатель (LanguageSwitcher) меняет параметр lang в запросах, так что WeatherAPI сразу присылает локализованное описание. Температура отображается строго в °C.
 
 ---
 
 ## 🐳 Docker / Production-like стек
 
-`bash
+```bash
 cp .env.example .env # локальный запуск
 cp .env.example .env.prod # для docker-compose.prod.yml
+```
 
 # Дев-стек с мониторингом
-
+```docker
 docker compose up --build
-
+```
 # Прод-стек
-
+```docker
 docker compose -f docker-compose.prod.yml up --build
-`
+```
 Сервисы:
 
 - Backend → http://localhost:8000 (API + /metrics)
@@ -84,20 +87,20 @@ Grafana провиженит datasource prometheus и подхватывает �
 
 ### Backend
 
-`bash
+```bash
 cd backend
 uv run pytest  # pytest.ini включает --cov app
-`
+```
 Тесты покрывают домен, use-case, интеграцию WeatherAPI (respx), REST-роуты и /metrics.
 
 ### Frontend
 
-`bash
+```bash
 cd frontend
 npm install
 npm run test:unit
-`
-Vitest тестирует WeatherCard (в т.ч. корректный символ °C). При необходимости добавляйте новые тесты для composables/страниц.
+```
+Vitest тестирует WeatherCard (в т.ч. корректный символ °C). При необходимости можно добавить новые тесты для composables/страниц.
 
 ---
 
